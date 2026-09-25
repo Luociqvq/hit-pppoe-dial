@@ -1,3 +1,4 @@
 # 真实凭据和运行日志永远不要提交
 config.ini
 dial.log
+wifi.log
