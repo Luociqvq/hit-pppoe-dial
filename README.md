@@ -90,6 +90,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File wifi.ps1 -Action status
 
 这两个 HTTP 请求都用 `curl.exe --interface <无线网卡IP>` **绑定无线口**发出，否则机器上同时插着网线时探测会从有线口出去、被误判成"已认证"。
 
+换设备测试前先确认那台机器上已经有 `HIT-WLAN` 这个无线配置文件（`netsh wlan show profiles`）。没有的话：在系统托盘里连一次这个 SSID（开放式网络，不需要密钥，连上后 Windows 会自动存成 profile），或者用一个 XML 模板 `netsh wlan add profile filename="HIT-WLAN.xml"` 导入。脚本本身只负责"用已有 profile 关联"，不替你创建。
+
 ### ⚠️ 还没验证的部分
 
 **这套流程我没有跑通过一次真实认证**，因为手边的机器在 WiFi 上扫不到任何 SSID（`netsh wlan show networks` 返回"当前没有可见的网络"），只有失败分支是实测过的（关联不起来时正确报"检查范围内有没有这个 SSID"，并且**不会**误发认证）。请在能连上校园网 WiFi 的设备上试，然后：
